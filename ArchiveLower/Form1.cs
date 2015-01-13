@@ -115,10 +115,19 @@ namespace ArchiveLower
                                 File.Copy(outFile, inFile, true);
                                 File.Delete(outFile);
                                 //Update to islowered=1
-                                Ta.Update_Islowered(int.Parse(Dt.Rows[0]["Id"].ToString()));
+                                Ta.Update_Islowered(1,int.Parse(Dt.Rows[0]["Id"].ToString()));
                             }
+                            else
+                            {
+                                //Convert error
+                                Ta.Update_Islowered(2, int.Parse(Dt.Rows[0]["Id"].ToString()));
+                            }
+                        } 
+                        else
+                        {
+                            //File not exist Source:
+                            Ta.Update_Islowered(3, int.Parse(Dt.Rows[0]["Id"].ToString()));
                         }
-                        
                     }
                 }
             }
