@@ -109,11 +109,14 @@ namespace ArchiveLower
                         {
                             VideoConverter(inFile, outFile, Bitrate);
 
-                            //Copy to server
-                            File.Copy(outFile, inFile, true);
-                            File.Delete(outFile);
-                            //Update to islowered=1
-                            Ta.Update_Islowered(int.Parse(Dt.Rows[0]["Id"].ToString()));
+                            if (File.Exists(outFile))
+                            {
+                                //Copy to server
+                                File.Copy(outFile, inFile, true);
+                                File.Delete(outFile);
+                                //Update to islowered=1
+                                Ta.Update_Islowered(int.Parse(Dt.Rows[0]["Id"].ToString()));
+                            }
                         }
                         
                     }
